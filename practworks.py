@@ -16,3 +16,8 @@ def generate_question_and_answer():
 
     #calculate x
     x = (sum_of_ages - 2*years)/(numerator+denominator)
+    """intiution: 
+    Age is typically considered as a whole number, and it doesnt make sense for someones age 
+    to be in fractions
+    """
+
