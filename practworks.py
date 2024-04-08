@@ -25,4 +25,12 @@ def generate_question_and_answer():
         Age is typically considered as a whole number, and it doesnt make sense for someones age 
         to be in fractions
         """
+    age1_now = int(numerator*x)
+    age2_now = int(denominator*x)
+
+    # printing formatted question
+    question = f"The ages of {name1} and {name2} are in the ratio of {numerator}:{denominator}. After {
+        years} years, the sum of their ages will be {sum_of_ages} years. What is their age now?"
+    
+    # print(question)
 
