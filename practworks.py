@@ -25,6 +25,9 @@ def generate_question_and_answer():
         Age is typically considered as a whole number, and it doesnt make sense for someones age 
         to be in fractions
         """
+        if x.is_integer(): # check if x is a whole number
+            break
+
     age1_now = int(numerator*x)
     age2_now = int(denominator*x)
 
