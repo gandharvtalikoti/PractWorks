@@ -1,66 +1,46 @@
 import random
 
-
-def generate_question_and_answer():
-    """to handle the situation in line number 22 i have adjusted the problem parameters until the ages can be expressed as whole numbers.
-        For instance, you could try different ratios, different numbers of years, or different sums of ages after those years until you find a combination that results in whole numbers for the ages.
-        So i have used while loop till i get correct set of random values so that it computes upto to a whole number result
-        """
-    # Generating random names
-    names = ["Rahul", "Pratik", "Poornima", "Omkar", "Sushant", "Suma"]
+def generate_age_question():
+    # Names for random selection
+    names = ['Raunak', 'Mohini', 'Sushanth', 'Suma', 'Amit', 'Priya', 'John', 'Lily', 'Carlos', 'Maria']
+    
+    # Randomly picking two different names
     name1, name2 = random.sample(names, 2)
+    
+    # Randomly picking ratios that are easy to handle (simple fractions)
+    ratios = [(2, 1), (3, 2), (4, 3), (5, 3), (6, 1), (7, 5), (8, 3), (9, 4), (10, 3)]
+    ratio1, ratio2 = random.choice(ratios)
+    
+    # Randomly deciding how many years in the future we are considering
+    years_after = random.randint(2, 10)
+    
+    # Generate a base age multiplier x
+    x = random.randint(5, 20)  # Base multiplier for ages to ensure ages are integers
 
-    # Generate random ratios
-    numerator = random.randint(2, 10)
-    denominator = random.randint(2, 10)
+    # Calculate the exact ages using ratios
+    age1 = ratio1 * x
+    age2 = ratio2 * x
+    
+    # Setting the total future age such that it is a realistic value and fits the equation exactly
+    total_future_age = age1 + age2 + 2 * years_after
 
-    # generate random number of years
-    years = random.randint(1, 10)
-
-    # generate random value sum_of_ages
-    sum_of_ages = random.randint(40, 100)
-
-    # calculate x
-    x = (sum_of_ages - 2*years)/(numerator+denominator)
-    """intiution: 
-        Age is typically considered as a whole number, and it doesnt make sense for someones age 
-        to be in fractions
-        """
-    if x.is_integer():  # check if x is a whole number
-        # adjust
-        sum_of_ages += int(x*(numerator+denominator))
-        x = (sum_of_ages - 2*years)/(numerator+denominator)
-
-    age1_now = int(numerator*x)
-    age2_now = int(denominator*x)
-
-    # printing formatted question
-    question = f"The ages of {name1} and {name2} are in the ratio of {numerator}:{denominator}. After {
-        years} years, the sum of their ages will be {sum_of_ages} years. What is their age now?"
-
-    # print(question)
-    # Printing formatted answer
-    answer = f"Since the ages of {name1} and {name2} are in the ratio of {numerator}:{
-        denominator} today, let their ages be {numerator}x and {denominator}x respectively.\n"
-    answer += f"Their individual ages after {years} years will be $ {
-        numerator}x + {years} $ and $ {denominator}x + {years} $.\n"
-    answer += f"It is given that the sum of their ages after {
-        years} years will be {sum_of_ages}. Hence we have,\n"
-    answer += f"\\[ {numerator}x + {years} + {denominator}x + {years} = {sum_of_ages} \\]\n"
-    answer += f"\\[ {numerator + denominator}x + {2 *
-                                                  years} = {sum_of_ages} \\]\n"
-    answer += f"\\[ {numerator +
-                     denominator}x = {sum_of_ages} - {2*years} \\]\n"
-    answer += f"\\[ {numerator + denominator}x = {sum_of_ages - 2*years} \\]\n"
-    answer += f"\\[ x = \\frac{{{sum_of_ages - 2 *
-                                 years}}}{{{numerator + denominator}}} \\]\n"
-    answer += f"\\[ x = {x} \\]\n"
-    answer += f"\nHence the age of {name1} is $ {int(numerator)} \\times {int(x)} = {
-        age1_now} $ and the age of {name2} is $ {int(denominator)} \\times {int(x)} = {age2_now} $."
-
+    question = (f"Question: The ages of {name1} and {name2} are in the ratio of {ratio1}:{ratio2}. "
+                f"After {years_after} years, the sum of their ages will be {total_future_age} years. "
+                "What is their age now?")
+    
+    answer = (f"Answer: Since the ages of {name1} and {name2} are in the ratio of {ratio1}:{ratio2} today, let their ages be {age1} and {age2} respectively.\n\n"
+              f"Their individual ages after {years_after} years will be $ {ratio1}x+ {years_after} $ and $ {ratio2}x+ {years_after} $."
+              f"It is given that the sum of their ages after {years_after} years will be {total_future_age}. Hence we have,\n\n"
+              f"\\[ ({ratio1}x + {years_after}) + ({ratio2}x + {years_after}) = {total_future_age} \\]\n"
+              f"\\[ {ratio1 + ratio2}x + {2*years_after} = {total_future_age} \\]\n"
+              f"\\[ {ratio1 + ratio2}x = {total_future_age - 2*years_after} \\]\n"
+              f"\\[ x = \\frac{{{total_future_age - 2 * years_after}}}{{{ratio1 + ratio2}}} \\]\n"
+              f"\\[ x = {x} \\]\n\n"
+              f"Hence the age of {name1} is $ {ratio1} \\times {x} = {age1} $ and the age of {name2} is $ {ratio2} \\times {x} = {age2} $.")
+    
     return question, answer
 
-
-question, answer = generate_question_and_answer()
-print("Question: ", question)
-print("Answer: ", answer)
+# Example use of the function
+q, a = generate_age_question()
+print(q)
+print(a)
